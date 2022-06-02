@@ -3,18 +3,19 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
-    function Btn({ text, changeValue }) {
+    function Btn({ text, fontSize = 20 }) {
       console.log(text, "was rendered");
       return (
         <button
-          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
+            fontSize,
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
@@ -24,14 +25,15 @@
         </button>
       );
     }
-    const MemorizedBtn = React.memo(Btn); //pros가 변경되지 않는한 re-render하지 않도록
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
     function App() {
-      const [value, setValue] = React.useState("Save Changes");
-      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <MemorizedBtn text={value} changeValue={changeValue} />
-          <MemorizedBtn text="continue" />
+          <Btn text="Save Changes" fontSize={30} />
+          <Btn text="Continue" />
         </div>
       );
     }
