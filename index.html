@@ -8,11 +8,12 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
+    //App은 컴포넌트
     function App() {
       const [counter, setCounter] = React.useState(0); //state
       //클릭 핸들러
       const onClick = () => {
-        setCounter(counter + 1); //리렌더링 일으킴
+        setCounter((current) => current + 1);
       };
       //컴포넌트 리턴
       return (
