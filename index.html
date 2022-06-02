@@ -9,11 +9,16 @@
   <script type="text/babel">
     const root = document.getElementById("root");
     function App() {
-      const [counter, modifier] = React.useState(0);
+      const [counter, setCounter] = React.useState(0); //state
+      //클릭 핸들러
+      const onClick = () => {
+        setCounter(counter + 1); //리렌더링 일으킴
+      };
+      //컴포넌트 리턴
       return (
         <div>
           <h3>Total clicks: {counter}</h3>
-          <button>Click me</button>
+          <button onClick={onClick}>Click me</button>
         </div>
       );
     }
